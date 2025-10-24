@@ -10,8 +10,8 @@
   --text-primary: #FFFFFF; /* Sekunder Putih */
   --text-secondary: #b3b3b3;
   --border-color: #333333;
-  --accent: #6d28d9;
-  --accent-dark: #6d28d9;
+  --accent: #ffffff3b;
+  --accent-dark: #ffffff;
   
   /* Variabel untuk background meteor */
   --bg-meteor: url('https://www.transparenttextures.com/patterns/stardust.png');
@@ -23,8 +23,10 @@ body.light-theme {
   --bg-secondary: #FFFFFF; /* Putih */
   --bg-card: #ebebeb;
   --text-primary: #000000; /* Sekunder Hitam */
-  --text-secondary: #4d4d4d; /* (Sisa variabel dari kode Anda) */
-  --border-color: #dddddd; /* (Sisa variabel dari kode Anda) */
+  --text-secondary: #000000; /* (Sisa variabel dari kode Anda) */
+  --border-color: #000000; /* (Sisa variabel dari kode Anda) */
+  --accent: #030303;
+  --accent-dark: #6d28d9;
 }
 
 /* --- Atur Warna Meteor untuk Light Mode --- */
@@ -65,6 +67,23 @@ p, li {
 }
 
 /* --- WELCOME SCREEN & ANIMASI METEOR --- */
+body.light-theme #welcome-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Background diatur oleh #profile-hero di dalam */
+
+  background-image: linear-gradient(
+    to top, /* Arah gradien dari atas ke bawah */
+    var(--bg-primary), /* Warna atas (hitam) */
+    #a6dce5 /* Warna bawah (ungu sangat gelap, sedikit lebih gelap dari --accent-dark) */
+  );
+}
 #welcome-section {
   position: relative;
   width: 100%;
@@ -75,6 +94,12 @@ p, li {
   justify-content: center;
   overflow: hidden;
   /* Background diatur oleh #profile-hero di dalam */
+
+  background-image: linear-gradient(
+    to top, /* Arah gradien dari atas ke bawah */
+    var(--bg-primary), /* Warna atas (hitam) */
+    #202020 /* Warna bawah (ungu sangat gelap, sedikit lebih gelap dari --accent-dark) */
+  );
 }
 
 .meteor {
@@ -206,13 +231,9 @@ header nav {
 
 /* --- KONTEN UTAMA --- */
 main {
-  /* Hapus padding-top, karena konten pertama ada di welcome-section */
   width: 100%;
-  max-width: 1000px; /* Perkecil agar lebih fokus */
-  margin: 0 auto;
   flex-grow: 1;
-  padding-left: 20px;
-  padding-right: 20px;
+  /* HAPUS padding-left & padding-right DARI SINI */
 }
 
 /* Konten Hero di dalam Welcome Screen */
@@ -269,11 +290,20 @@ main {
 /* --- Konten Artikel (setelah scroll) --- */
 #content {
   width: 100%;
-  padding-top: 100px; /* Jarak dari header yg fixed */
+position: relative;
 }
 
+body.light-theme .role-content {
+padding: 10px;
+  /* Anda mungkin juga ingin memastikan warna border berubah */
+  background-image: linear-gradient(
+    to top, /* Arah gradien dari atas ke bawah */
+    #ffffff, /* Warna atas (hitam) */
+    #a6dce5 /* Warna bawah (ungu sangat gelap, sedikit lebih gelap dari --accent-dark) */
+  );
+}
 .role-content {
-  background-color: none;
+  background-color: #252525;
   padding: 25px;
 
 
@@ -342,6 +372,7 @@ footer {
   /* Media query untuk Welcome Screen */
   #welcome-section { 
     flex-direction: column; 
+    
   }
   #profile-hero {
     padding: 20px;
@@ -349,75 +380,137 @@ footer {
 }
 
 /* ---
-  STYLE BARU: Keahlian & Proyek
+  STYLE BARU: Keahlian (Mirip Gambar Referensi)
 --- */
 
-/* --- Style Keahlian --- */
+/* --- Style Grid --- */
+#skills{
+margin-top: 20px;
+}
 .skills-grid {
   display: grid;
-  /* Buat 3 kolom di desktop, 2 di tablet, 1 di mobile */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  /* BARU: Buat 4 kolom di desktop, 2 di tablet, 1 di mobile */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 15px; /* Jarak antar kartu lebih kecil */
   margin-top: 20px;
 }
 
+/* --- Style Kartu Item --- */
 .skill-item {
-  background-color: var(--bg-primary); /* Sedikit lebih gelap dari bg-card */
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.skill-item img {
-  height: 50px; /* Ukuran ikon */
+  background-color: #4b4a4a; /* Warna kartu sedikit beda dari section */
+  border: 1px solid rgba(100, 100, 100, 0.349);
+  border-radius: 8px; /* Sudut sedikit melengkung */
+  padding: 25px 20px;
+  /* BARU: Gunakan Flexbox untuk ikon & teks */
+  display: flex;
+  align-items: center; /* Sejajarkan vertikal */
+  gap: 15px; /* Jarak antara ikon dan teks */
+  
+  text-align: left; /* Teks rata kiri */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   margin-bottom: 15px;
 }
+body.light-theme .skill-item {
+  background-color:#abd6df; /* Warna kartu terang (#ebebeb dari variabel Anda) */
+  border: 1px solid rgba(100, 100, 100, 0.315);
+  /* Warna teks mungkin perlu disesuaikan jika belum */
+  /* color: var(--text-primary); */ /* Jika diperlukan */
+}
 
-.skill-item h4 {
-  font-size: 1.1rem;
+/* Pastikan teks di dalam item juga kontras di light mode */
+body.light-theme .skill-item h4 {
   color: var(--text-primary);
-  margin-bottom: 15px;
 }
 
-.skill-bar-container {
-  width: 100%;
-  background-color: var(--border-color);
-  border-radius: 30px;
-  overflow: hidden;
+body.light-theme .skill-item .skill-description {
+  color: var(--text-secondary);
 }
+
+
+
 
 .skill-bar {
   background-color: var(--accent);
-  color: #FFF;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 4px 0;
-  text-align: center;
   border-radius: 30px;
+  height: 8px; /* <-- Tambahkan tinggi agar bar terlihat jelas */
+  /* Hapus color, font-size, font-weight, padding, text-align */
+}
+
+
+.skill-item:hover {
+  transform: translateY(-3px); /* Efek angkat sedikit */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  background-color: var(--accent); /* Ganti background saat hover */
+}
+/* Ubah warna teks saat hover agar kontras */
+.skill-item:hover h4,
+.skill-item:hover .skill-description {
+  color: #FFFFFF; /* Putih */
+}
+
+
+/* --- Style Ikon --- */
+.skill-item img {
+  height: 40px; /* Ukuran ikon sedikit lebih kecil */
+  width: 40px;  /* Pastikan lebar sama */
+  object-fit: contain;
+  margin-bottom: 0; /* Hapus margin bawah */
+  flex-shrink: 0; /* Jangan biarkan ikon menyusut */
+}
+
+/* --- Style Teks (Nama & Deskripsi) --- */
+.skill-text {
+  /* Wrapper ini agar nama & deskripsi tetap berkelompok */
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-item h4 {
+  font-size: 1rem; /* Sedikit lebih kecil */
+  color: var(--text-primary);
+  margin-bottom: 10px; /* Jarak kecil ke deskripsi */
+}
+
+/* BARU: Style untuk deskripsi */
+.skill-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+
+
+/* --- Penyesuaian Responsif untuk Grid --- */
+@media screen and (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom di tablet */
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .skills-grid {
+    grid-template-columns: 1fr; /* 1 kolom di mobile */
+  }
 }
 
 /* --- Style Proyek --- */
 .projects-list {
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Jarak antar proyek */
+  /* Gap dihapus */
 }
 
 .project-item {
   display: flex;
   align-items: center;
-  gap: 30px;
-  background-color: var(--bg-primary); /* Opsional: jika ingin kartu */
-  padding: 20px; /* Opsional: jika ingin kartu */
-  border-radius: 10px; /* Opsional: jika ingin kartu */
-  border: 1px solid var(--border-color); /* Opsional: jika ingin kartu */
+  gap: 30px; /* Gap horizontal antara gambar & teks */
+  margin-bottom: 40px; /* <-- TAMBAHKAN JARAK BAWAH DI SINI */
+  /* ... (style kartu opsional) ... */
+}
+
+/* Opsional: Hapus margin dari item terakhir agar pas dengan footer */
+.projects-list .project-item:last-child {
+  margin-bottom: 0;
 }
 
 .project-image {
@@ -439,7 +532,7 @@ footer {
 
 .project-details h3 {
   font-size: 1.5rem;
-  color: var(--accent);
+  color: var(--text-primary);
 }
 
 .project-details h4 {
@@ -453,6 +546,13 @@ footer {
   font-size: 1rem;
   color: var(--text-primary);
   opacity: 0.9;
+}
+
+.content-wrapper {
+  max-width: 1000px; /* Lebar maksimal konten Anda */
+  margin: 0 auto;    /* Memusatkan konten */
+  padding-left: 20px;  /* <--- INI PENTING UNTUK MARGIN KIRI */
+  padding-right: 20px; /* <--- INI PENTING UNTUK MARGIN KANAN */
 }
 
 /* --- Style Indikator Link Navbar Aktif --- */
@@ -531,6 +631,9 @@ footer {
 }
 
 /* --- Bagian Kontak --- */
+#contact {
+  margin-top: 15px;
+}
 .contact-container {
   display: flex;
   flex-wrap: wrap; /* Agar responsif di mobile */
@@ -630,4 +733,120 @@ footer {
 
 .social-links a:hover {
   color: var(--accent);
+}
+
+
+/* ---
+  STYLE BARU: Tampilan Tentang Saya (Rata Kiri, Tanpa Kartu)
+--- */
+
+/* Atur Section #about jadi rata KIRI */
+#about .content-wrapper {
+  text-align: left; /* <-- UBAH KE KIRI */
+  /* Hapus max-width jika ingin konten lebih lebar,
+     atau sesuaikan nilainya */
+  /* max-width: 1000px; */ 
+}
+
+/* Gaya Judul Utama Section */
+#about h2 {
+  /* Hapus display: inline-block; jika ada */
+  border-bottom: 1px solid var(--border-color); /* Garis bawah full-width */
+  padding-bottom: 10px;
+  margin-bottom: 40px; /* Jarak lebih besar ke konten */
+  text-align: left; /* Pastikan judul rata kiri */
+}
+
+/* -- Bagian Biografi -- */
+.about-biography {
+  /* Hapus max-width dan margin auto */
+  margin-bottom: 40px; /* Jarak ke Edukasi */
+}
+
+/* Tambahkan Judul Kecil (Mirip BIOGRAPHY) */
+.about-biography::before {
+  content: "BIOGRAFI"; /* Teks judul kecil */
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-secondary); /* Warna abu-abu */
+  margin-bottom: 15px;
+  letter-spacing: 1px; /* Sedikit spasi antar huruf */
+}
+
+.about-content p {
+  font-size: 1rem; /* Ukuran normal */
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  /* Hapus text-align: center; jika ada */
+}
+
+/* Tambahkan Judul Kecil (Mirip EDUKASI) */
+.about-education::before {
+  content: "EDUKASI"; /* Teks judul kecil */
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+/* Hapus h3 Edukasi (karena sudah ada ::before) */
+.about-education h3 {
+   display: none; 
+}
+
+.education-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0; /* Hapus margin atas */
+  /* Hapus display: grid/flex; justify-items: center; */
+}
+
+.education-list li {
+  /* Hapus background, border, border-radius, padding, margin-bottom */
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 25px; /* Beri jarak antar item edukasi */
+  
+  /* Atur layout logo dan teks sejajar */
+  display: flex; 
+  align-items: center; 
+  text-align: left; 
+  
+  /* Hapus max-width, width, hover effects */
+}
+
+/* Style logo (bisa diperkecil) */
+.education-logo {
+  width: 45px;   /* Ukuran logo lebih kecil */
+  height: 45px;
+  object-fit: contain; 
+  margin-right: 15px; /* Jarak logo ke teks */
+  margin-bottom: 0; /* Hapus margin bawah */
+}
+
+.education-list li h4 {
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  font-size: 1rem; /* Ukuran normal */
+  text-align: left; /* Pastikan rata kiri */
+}
+
+.education-list li span {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: left; /* Pastikan rata kiri */
+}
+
+.section-divider {
+  border: none; /* Hapus border default */
+  height: 1px; /* Ketebalan garis */
+  background-color: var(--border-color); /* Warna garis (sesuai tema) */
+  max-width: 1000px; /* Samakan dengan lebar konten */
+  margin: 0 auto 60px auto; /* Pusatkan dan beri jarak bawah */
 }
